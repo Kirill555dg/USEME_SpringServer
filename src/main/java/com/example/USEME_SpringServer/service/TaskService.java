@@ -1,5 +1,6 @@
 package com.example.USEME_SpringServer.service;
 
+import com.example.USEME_SpringServer.exception.GlobalExceptionHandler;
 import com.example.USEME_SpringServer.exception.TaskNotFoundException;
 import com.example.USEME_SpringServer.model.Task;
 import com.example.USEME_SpringServer.repository.TaskRepository;
@@ -7,6 +8,7 @@ import com.example.USEME_SpringServer.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class TaskService {
         return taskRepository.findAll();
     }
     public Task findById(Long id) {
-        return taskRepository.findById(id)
+        return taskRepository
+                .findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
@@ -33,7 +36,8 @@ public class TaskService {
     }
 
     public Task update(Long id, Task task) {
-        return taskRepository.findById(id)
+        return taskRepository
+                .findById(id)
                 .map(oldTask -> {
                     oldTask.setSubject(task.getSubject());
                     oldTask.setTopic(task.getTopic());

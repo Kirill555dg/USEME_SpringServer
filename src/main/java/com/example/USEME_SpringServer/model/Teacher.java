@@ -39,6 +39,9 @@ public class Teacher {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(name = "gender")
+    private Boolean isMale;
+
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     private List<Group> groups = new ArrayList<>();
 
