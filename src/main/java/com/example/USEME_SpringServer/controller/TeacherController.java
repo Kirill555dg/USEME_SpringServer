@@ -26,8 +26,12 @@ public class TeacherController {
     }
 
     @PostMapping("/registration")
-    public Teacher saveTeacher(@RequestBody Teacher teacher) {
+    public Teacher registerTeacher(@RequestBody Teacher teacher) {
         return teacherService.registration(teacher);
+    }
+    @PostMapping("/authorization")
+    public Teacher authorizeTeacher(@RequestBody Teacher teacher) {
+        return teacherService.authorization(teacher);
     }
 
     @GetMapping("/teacher")

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyError {
-    private Integer statusCode;
-    private String message;
+    private Integer status;
+    private String error;
 }

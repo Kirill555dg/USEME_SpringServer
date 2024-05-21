@@ -3,6 +3,7 @@ package com.example.USEME_SpringServer.service;
 
 import com.example.USEME_SpringServer.exception.UserAlreadyExistException;
 import com.example.USEME_SpringServer.exception.UserNotFoundException;
+import com.example.USEME_SpringServer.exception.WrongPasswordException;
 import com.example.USEME_SpringServer.model.Teacher;
 import com.example.USEME_SpringServer.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,18 @@ public class TeacherService {
         }
         return teacherRepository.saveAndFlush(teacher);
     }
+    public Teacher authorization(Teacher teacher) {
+        String email = teacher.getEmail();
+        String password = teacher.getPassword();
+        Teacher real = teacherRepository
+                .findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException(email));
+
+        if (!real.getPassword().equals(password)) {
+            throw new WrongPasswordException();
+        }
+        return real;
+    }
 
     public List<Teacher> findAllTeacher() {
         return teacherRepository.findAll();
@@ -45,5 +58,6 @@ public class TeacherService {
     public void deleteTeacher(String email) {
         teacherRepository.deleteByEmail(email);
     }
+
 
 }

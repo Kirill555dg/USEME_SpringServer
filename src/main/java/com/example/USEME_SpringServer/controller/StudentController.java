@@ -1,6 +1,7 @@
 package com.example.USEME_SpringServer.controller;
 
 import com.example.USEME_SpringServer.model.Student;
+import com.example.USEME_SpringServer.model.Teacher;
 import com.example.USEME_SpringServer.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +17,17 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping
-    public List<Student> findStudent() {
+    public List<Student> findAllStudent() {
         return studentService.findAllStudent();
     }
 
     @PostMapping("/registration")
-    public String saveStudent(@RequestBody Student student) {
-        studentService.saveStudent(student);
-        return "Student successfully saved";
+    public Student registerTeacher(@RequestBody Student student) {
+        return studentService.registration(student);
+    }
+    @PostMapping("/authorization")
+    public Student authorizeTeacher(@RequestBody Student student) {
+        return studentService.authorization(student);
     }
 
     @GetMapping("/student")
