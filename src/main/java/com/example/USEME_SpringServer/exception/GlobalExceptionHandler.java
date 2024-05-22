@@ -43,4 +43,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.UNAUTHORIZED
         );
     }
+
+    @ExceptionHandler
+    public ResponseEntity<MyError> catchTopicNotFoundException(TopicNotFoundException e) {
+        return new ResponseEntity<>(
+                new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
 }

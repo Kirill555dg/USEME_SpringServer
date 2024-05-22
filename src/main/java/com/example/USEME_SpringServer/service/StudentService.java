@@ -28,7 +28,7 @@ public class StudentService {
         if (studentRepository.existsByEmail(email)) {
             throw new UserAlreadyExistException(email);
         }
-        return studentRepository.saveAndFlush(student);
+        return studentRepository.save(student);
     }
     public Student authorization(Student student) {
         String email = student.getEmail();

@@ -1,5 +1,6 @@
 package com.example.USEME_SpringServer.model;
 
+import com.example.USEME_SpringServer.model.invite.Invite;
 import com.example.USEME_SpringServer.model.statistic.Statistic;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,11 +41,8 @@ public class Student {
     @OneToMany(mappedBy = "pk.student", cascade = CascadeType.ALL)
     private List<Statistic> statistics = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "students_groups",
-    joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
-    private List<Group> groups = new ArrayList<>();
+    @OneToMany(mappedBy = "student")
+    private List<Invite> invites = new ArrayList<>();
 
     @Transient
     private int age;

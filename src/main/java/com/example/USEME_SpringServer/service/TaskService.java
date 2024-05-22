@@ -39,8 +39,7 @@ public class TaskService {
         return taskRepository
                 .findById(id)
                 .map(oldTask -> {
-                    oldTask.setSubject(task.getSubject());
-                    oldTask.setTopic(task.getTopic());
+                    oldTask.setTopicPK(task.getTopicPK());
                     oldTask.setCategory(task.getCategory());
                     oldTask.setCondition(task.getCondition());
                     oldTask.setAnswer(task.getAnswer());

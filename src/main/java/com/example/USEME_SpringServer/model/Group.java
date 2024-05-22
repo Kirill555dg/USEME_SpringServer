@@ -1,6 +1,7 @@
 package com.example.USEME_SpringServer.model;
 
 
+import com.example.USEME_SpringServer.model.invite.Invite;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "groups")
@@ -32,11 +31,8 @@ public class Group {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "students_groups",
-    inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
-    joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"))
-    private List<Student> students = new ArrayList<>();
+    @OneToMany(mappedBy = "group")
+    private List<Invite> invites = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)

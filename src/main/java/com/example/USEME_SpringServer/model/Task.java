@@ -1,6 +1,8 @@
 package com.example.USEME_SpringServer.model;
 
 import com.example.USEME_SpringServer.model.statistic.Statistic;
+import com.example.USEME_SpringServer.staticData.Topic;
+import com.example.USEME_SpringServer.staticData.TopicPK;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,11 +26,7 @@ public class Task {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "subject")
-    private String subject;
-
-    @Column(name = "topic")
-    private String topic;
+    private TopicPK topicPK;
 
     @Column(name = "category")
     private String category;

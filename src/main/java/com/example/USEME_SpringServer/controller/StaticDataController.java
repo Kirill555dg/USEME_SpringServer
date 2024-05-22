@@ -1,6 +1,8 @@
-package com.example.USEME_SpringServer.staticData;
+package com.example.USEME_SpringServer.controller;
 
 
+import com.example.USEME_SpringServer.exception.TopicNotFoundException;
+import com.example.USEME_SpringServer.staticData.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,12 @@ public class StaticDataController {
     @GetMapping("/topics")
     public List<Topic> getTopics(@RequestParam String subject) {
         return topicRepo.findAllByPkSubject(subject);
+    }
+
+    @PostMapping("/topics/topic")
+    public Topic getTopics(@RequestBody TopicPK topicPK) {
+        return topicRepo.findById(topicPK)
+                .orElseThrow(TopicNotFoundException::new);
     }
 
     @GetMapping("/categories")
