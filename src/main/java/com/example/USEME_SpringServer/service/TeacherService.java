@@ -7,11 +7,7 @@ import com.example.USEME_SpringServer.exception.WrongPasswordException;
 import com.example.USEME_SpringServer.model.Teacher;
 import com.example.USEME_SpringServer.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -59,5 +55,13 @@ public class TeacherService {
         teacherRepository.deleteByEmail(email);
     }
 
-
+    public Teacher changeInfo(Teacher teacher) {
+        Teacher realTeacher = findByEmail(teacher.getEmail());
+        realTeacher.setFirstName(teacher.getFirstName());
+        realTeacher.setLastName(teacher.getLastName());
+        realTeacher.setMiddleName(teacher.getMiddleName());
+        realTeacher.setIsMale(teacher.getIsMale());
+        realTeacher.setDateOfBirth(teacher.getDateOfBirth());
+        return realTeacher;
+    }
 }

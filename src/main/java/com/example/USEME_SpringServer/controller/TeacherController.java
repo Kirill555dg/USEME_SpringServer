@@ -39,6 +39,11 @@ public class TeacherController {
         return teacherService.findByEmail(email);
     }
 
+    @PatchMapping("/change_info")
+    public Teacher changeInfo(@RequestBody Teacher teacher){
+        return teacherService.changeInfo(teacher);
+    }
+
     @PutMapping("/update_teacher")
     public Teacher updateStudent(@RequestBody Teacher teacher) {
         return teacherService.updateTeacher(teacher);

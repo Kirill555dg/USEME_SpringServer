@@ -54,4 +54,8 @@ public class TaskService {
     public void delete(Long id) {
         taskRepository.deleteById(id);
     }
+
+    public List<Task> advancedSearch(Long id, String subjectName, Short topicNum, String categoryName) {
+        return taskRepository.advancedSearch(id,subjectName,topicNum,categoryName);
+    }
 }

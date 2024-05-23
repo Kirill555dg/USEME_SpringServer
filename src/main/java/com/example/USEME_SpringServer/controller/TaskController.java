@@ -25,6 +25,14 @@ public class TaskController {
         return taskService.findAll();
     }
 
+    @GetMapping("/search")
+    public List<Task> searchTasks(@RequestParam Long id,
+                                  @RequestParam String subjectName,
+                                  @RequestParam Short topicNum,
+                                  @RequestParam String categoryName) {
+        return taskService.advancedSearch(id, subjectName, topicNum, categoryName);
+    }
+
     @GetMapping("/{id}")
     public Task getTask(@PathVariable Long id){
         return taskService.findById(id);

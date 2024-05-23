@@ -56,4 +56,14 @@ public class StudentService {
     public void deleteStudent(String email) {
         studentRepository.deleteByEmail(email);
     }
+
+    public Student changeInfo(Student student) {
+
+        Student realStudent = findByEmail(student.getEmail());
+        realStudent.setFirstName(student.getFirstName());
+        realStudent.setLastName(student.getLastName());
+        realStudent.setIsMale(student.getIsMale());
+        realStudent.setDateOfBirth(student.getDateOfBirth());
+        return realStudent;
+    }
 }

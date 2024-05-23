@@ -30,9 +30,15 @@ public class StudentController {
         return studentService.authorization(student);
     }
 
+
     @GetMapping("/student")
     public Student findByEmail(@RequestParam String email) {
         return studentService.findByEmail(email);
+    }
+
+    @PatchMapping("/change_info")
+    public Student changeInfo(@RequestBody Student student){
+        return studentService.changeInfo(student);
     }
 
     @PutMapping("/update_student")
