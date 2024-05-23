@@ -51,4 +51,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.NOT_FOUND
         );
     }
+
+    @ExceptionHandler
+    public ResponseEntity<MyError> catchGroupNotFoundException(GroupNotFoundException e) {
+        return new ResponseEntity<>(
+                new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
 }

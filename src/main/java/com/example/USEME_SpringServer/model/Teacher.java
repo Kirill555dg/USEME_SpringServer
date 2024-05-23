@@ -2,10 +2,7 @@ package com.example.USEME_SpringServer.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -43,6 +40,7 @@ public class Teacher {
     private Boolean isMale;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @Getter(AccessLevel.NONE)
     private List<Group> groups = new ArrayList<>();
 
     @Transient
@@ -50,5 +48,13 @@ public class Teacher {
 
     public int getAge() {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
+
+    public List<Long> getGroups(){
+        List<Long> groups_id = new ArrayList<>();
+        for (Group group : groups) {
+            groups_id.add(group.getId());
+        }
+        return groups_id;
     }
 }
