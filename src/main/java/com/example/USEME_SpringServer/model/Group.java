@@ -2,7 +2,9 @@ package com.example.USEME_SpringServer.model;
 
 
 import com.example.USEME_SpringServer.model.invite.Invite;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "name")
-@JsonIgnoreProperties({"invites", "homeworks"})
 public class Group {
 
     @Id
@@ -27,7 +28,6 @@ public class Group {
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
-    @Getter(AccessLevel.NONE)
     private Teacher teacher;
 
     @Column(name = "name", nullable = false)
@@ -42,11 +42,15 @@ public class Group {
     @Transient
     private int countMembers;
 
+    @Transient
+    private int countHomeworks;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "pk.group")
     private List<Invite> invites = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
-    @Getter(AccessLevel.NONE)
     private List<Homework> homeworks = new ArrayList<>();
 
     public int getCountMembers() {
@@ -59,12 +63,27 @@ public class Group {
         return countMembers;
     }
 
-    public List<Long> getHomeworks(){
-        List<Long> homeworks_id = new ArrayList<>();
-        for (Homework homework : homeworks) {
-            homeworks_id.add(homework.getId());
-        }
-        return homeworks_id;
+    public int getCountHomeworks(){
+        return homeworks.size();
+    }
+
+    @JsonIgnore
+    public List<Invite> getInvites() {
+        return invites;
+    }
+    @JsonProperty("invites")
+    public void setInvites(List<Invite> invites) {
+        this.invites = invites;
+    }
+
+    @JsonIgnore
+    public List<Homework> getHomeworks() {
+        return homeworks;
+    }
+
+    @JsonProperty("homeworks")
+    public void setHomeworks(List<Homework> homeworks) {
+        this.homeworks = homeworks;
     }
 }
 

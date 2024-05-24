@@ -19,11 +19,18 @@ public class StatisticController {
     private StatisticService statisticService;
 
     @GetMapping
-    public List<Statistic> getStatistic(@RequestParam(name = "student_id") Long studentId,
-                                        @RequestParam(name = "homework_id") Long homeworkId,
-                                        @RequestParam(name = "task_id") Long taskId) {
+    public List<Statistic> getStatistics(@RequestParam(name = "student_id") Long studentId,
+                                         @RequestParam(name = "homework_id") Long homeworkId,
+                                         @RequestParam(name = "task_id") Long taskId) {
         return statisticService.getStatistic(studentId, homeworkId, taskId);
     }
+
+    @GetMapping("/group")
+    public List<Statistic> findStatisticInGroup(@RequestParam(name = "student_id") Long studentId,
+                                                @RequestParam(name = "group_id") Long groupId) {
+        return statisticService.findStatisticInGroup(studentId, groupId);
+    }
+
     @GetMapping("/student")
     public List<Statistic> findStudentStatistic(@RequestParam(name = "student_id") Long studentId) {
         return statisticService.findStudentStatistic(studentId);

@@ -25,4 +25,6 @@ public interface StatisticRepository extends JpaRepository<Statistic, StatisticP
     List<Statistic> getStatistic(@Param("student_id") Long studentId,
                                  @Param("homework_id") Long homeworkId,
                                  @Param("task_id") Long taskId);
+
+    Boolean existsByPk_StudentAndPk_Homework(Student pk_student, Homework pk_homework);
 }

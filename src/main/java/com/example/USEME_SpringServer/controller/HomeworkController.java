@@ -2,6 +2,7 @@ package com.example.USEME_SpringServer.controller;
 
 import com.example.USEME_SpringServer.model.Group;
 import com.example.USEME_SpringServer.model.Homework;
+import com.example.USEME_SpringServer.model.Task;
 import com.example.USEME_SpringServer.service.HomeworkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,14 @@ public class HomeworkController {
         return homeworkService.findHomeworkById(id);
     }
 
+    @GetMapping("/{id}/tasks")
+    public List<Task> getHomeworkTasks(@PathVariable Long id) {
+        Homework homework = homeworkService.findHomeworkById(id);
+        return homework.getTasks();
+    }
+
     @GetMapping("/group")
-    public List<Homework> findAllTeacherGroups(@RequestParam("group_id") Long id) {
+    public List<Homework> findGroupHomeworks(@RequestParam("group_id") Long id) {
         return homeworkService.findByGroup(id);
     }
 

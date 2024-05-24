@@ -31,6 +31,7 @@ public class HomeworkService {
     }
 
     public Homework createHomework(Homework homework) {
+        System.out.println(homework.toString());
         return homeworkRepository.save(homework);
     }
 
