@@ -13,26 +13,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<MyError> catchTaskNotFoundException(TaskNotFoundException e){
-        return new ResponseEntity<>(
-                new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
-                HttpStatus.NOT_FOUND
-        );
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<MyError> catchUserAlreadyExistException(UserAlreadyExistException e){
+    public ResponseEntity<MyError> catchAlreadyExistException(AlreadyExistException e){
         return new ResponseEntity<>(
                 new MyError(HttpStatus.CONFLICT.value(), e.getMessage()),
                 HttpStatus.CONFLICT
-        );
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<MyError> catchUserNotFoundException(UserNotFoundException e) {
-        return new ResponseEntity<>(
-                new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
-                HttpStatus.NOT_FOUND
         );
     }
 
@@ -45,15 +29,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<MyError> catchTopicNotFoundException(TopicNotFoundException e) {
-        return new ResponseEntity<>(
-                new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
-                HttpStatus.NOT_FOUND
-        );
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<MyError> catchGroupNotFoundException(GroupNotFoundException e) {
+    public ResponseEntity<MyError> catchNotFoundException(NotFoundException e) {
         return new ResponseEntity<>(
                 new MyError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
                 HttpStatus.NOT_FOUND

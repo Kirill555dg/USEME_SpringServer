@@ -40,7 +40,7 @@ public class Group {
     @Transient
     private int countMembers;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "pk.group")
     private List<Invite> invites = new ArrayList<>();
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)

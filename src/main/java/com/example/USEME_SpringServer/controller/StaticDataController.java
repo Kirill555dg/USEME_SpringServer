@@ -1,7 +1,7 @@
 package com.example.USEME_SpringServer.controller;
 
 
-import com.example.USEME_SpringServer.exception.TopicNotFoundException;
+import com.example.USEME_SpringServer.exception.NotFoundException;
 import com.example.USEME_SpringServer.staticData.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,7 @@ public class StaticDataController {
     @PostMapping("/topics/topic")
     public Topic getTopics(@RequestBody TopicPK topicPK) {
         return topicRepo.findById(topicPK)
-                .orElseThrow(TopicNotFoundException::new);
+                .orElseThrow(() -> new NotFoundException("Указанный тип задач не найден"));
     }
 
     @GetMapping("/categories")

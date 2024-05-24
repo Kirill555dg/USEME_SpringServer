@@ -1,17 +1,13 @@
 package com.example.USEME_SpringServer.service;
 
-import com.example.USEME_SpringServer.exception.GlobalExceptionHandler;
-import com.example.USEME_SpringServer.exception.TaskNotFoundException;
+import com.example.USEME_SpringServer.exception.NotFoundException;
 import com.example.USEME_SpringServer.model.Task;
 import com.example.USEME_SpringServer.repository.TaskRepository;
-import com.example.USEME_SpringServer.repository.TeacherRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,7 +24,7 @@ public class TaskService {
     public Task findById(Long id) {
         return taskRepository
                 .findById(id)
-                .orElseThrow(() -> new TaskNotFoundException(id));
+                .orElseThrow(() -> new NotFoundException("Задачи с id " + id + " не существует"));
     }
 
     public void save(Task task) {

@@ -41,7 +41,7 @@ public class Student {
     @OneToMany(mappedBy = "pk.student", cascade = CascadeType.ALL)
     private List<Statistic> statistics = new ArrayList<>();
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "pk.student")
     private List<Invite> invites = new ArrayList<>();
 
     @Transient

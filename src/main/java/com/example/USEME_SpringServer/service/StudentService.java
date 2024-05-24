@@ -1,13 +1,11 @@
 package com.example.USEME_SpringServer.service;
 
-import com.example.USEME_SpringServer.exception.UserAlreadyExistException;
-import com.example.USEME_SpringServer.exception.UserNotFoundException;
+import com.example.USEME_SpringServer.exception.AlreadyExistException;
+import com.example.USEME_SpringServer.exception.NotFoundException;
 import com.example.USEME_SpringServer.exception.WrongPasswordException;
 import com.example.USEME_SpringServer.model.Student;
-import com.example.USEME_SpringServer.model.Teacher;
 import com.example.USEME_SpringServer.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,16 +24,14 @@ public class StudentService {
     public Student registration(Student student) {
         String email = student.getEmail();
         if (studentRepository.existsByEmail(email)) {
-            throw new UserAlreadyExistException(email);
+            throw new AlreadyExistException("Учащийся с почтой " + email +" уже существует");
         }
         return studentRepository.save(student);
     }
     public Student authorization(Student student) {
         String email = student.getEmail();
         String password = student.getPassword();
-        Student real = studentRepository
-                .findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(email));
+        Student real = findByEmail(email);
 
         if (!real.getPassword().equals(password)) {
             throw new WrongPasswordException();
@@ -46,7 +42,7 @@ public class StudentService {
     public Student findByEmail(String email) {
         return studentRepository
                 .findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException(email));
+                .orElseThrow(() -> new NotFoundException("Ученика с почтой " + email + " не существует"));
     }
 
     public Student updateStudent(Student student) {
@@ -65,5 +61,11 @@ public class StudentService {
         realStudent.setIsMale(student.getIsMale());
         realStudent.setDateOfBirth(student.getDateOfBirth());
         return realStudent;
+    }
+
+    public Student findStudentById(Long id) {
+        return studentRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("Ученика с id " + id + " не существует"));
     }
 }

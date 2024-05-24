@@ -15,26 +15,7 @@ public class Invite {
     @EmbeddedId
     private InvitePK pk;
 
-    @ManyToOne
-    @MapsId("studentId")
-    @JoinColumn(name = "student_id")
-    @Getter(AccessLevel.NONE)
-    private Student student;
-
-    @ManyToOne
-    @MapsId("groupId")
-    @JoinColumn(name = "group_id")
-    @Getter(AccessLevel.NONE)
-    private Group group;
-
     @Column(name = "accept")
     private Boolean isAccept;
 
-    public Long getStudent() {
-        return student.getId();
-    }
-
-    public Long getGroup() {
-        return group.getId();
-    }
 }
