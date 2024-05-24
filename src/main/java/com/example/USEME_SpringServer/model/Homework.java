@@ -48,4 +48,10 @@ public class Homework {
     @OneToMany(mappedBy = "pk.homework", cascade = CascadeType.ALL)
     private List<Statistic> statistics = new ArrayList<>();
 
+    @Transient
+    private int countTasks;
+
+    public int getCountTasks() {
+        return tasks.size();
+    }
 }
