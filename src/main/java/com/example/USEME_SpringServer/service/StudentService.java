@@ -24,6 +24,12 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+
+    public List<Student> findByIds(List<Long> ids) {
+        return studentRepository.findAllById(ids);
+    }
+
+
     public Student registration(Student student) {
         String email = student.getEmail();
         if (studentRepository.existsByEmail(email)) {
@@ -71,4 +77,5 @@ public class StudentService {
                 .findById(id)
                 .orElseThrow(() -> new NotFoundException("Ученика с id " + id + " не существует"));
     }
+
 }

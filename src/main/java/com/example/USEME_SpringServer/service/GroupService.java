@@ -1,14 +1,9 @@
 package com.example.USEME_SpringServer.service;
 
-import com.example.USEME_SpringServer.exception.AlreadyExistException;
 import com.example.USEME_SpringServer.exception.NotFoundException;
 import com.example.USEME_SpringServer.model.Group;
-import com.example.USEME_SpringServer.model.Student;
 import com.example.USEME_SpringServer.model.Teacher;
-import com.example.USEME_SpringServer.model.invite.Invite;
-import com.example.USEME_SpringServer.model.invite.InvitePK;
 import com.example.USEME_SpringServer.repository.GroupRepository;
-import com.example.USEME_SpringServer.repository.InviteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +20,16 @@ public class GroupService {
 
     public List<Group> findByTeacher(Long id) {
         return groupRepository.findByTeacher_Id(id);
+    }
+
+
+    public List<Group> findAllGroups() {
+        return groupRepository.findAll();
+    }
+
+
+    public List<Group> findByIds(List<Long> ids) {
+        return groupRepository.findAllById(ids);
     }
 
     public Group create(Group group, Long teacher_id) {

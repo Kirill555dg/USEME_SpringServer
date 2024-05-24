@@ -10,6 +10,9 @@ import com.example.USEME_SpringServer.repository.InviteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class InviteService {
 
@@ -21,6 +24,8 @@ public class InviteService {
 
     @Autowired
     private GroupService groupService;
+
+
 
     public Invite sendInvite(Long groupId, Long studentId) {
 
@@ -59,5 +64,35 @@ public class InviteService {
                 .findById(pk)
                 .orElseThrow(() -> new NotFoundException("Учащемуся с id " + studentId + " приглашение в группу с id " + groupId + " не поступало"));
         inviteRepository.delete(invite);
+    }
+
+    public List<Student> findStudentsByGroup(Long groupId) {
+        Group group = groupService.findGroupById(groupId);
+        List<Invite> invites = inviteRepository.findAllByIsAcceptTrueAndPk_Group(group);
+        List<Long> studentIds = new ArrayList<>();
+        for (Invite invite : invites) {
+            studentIds.add(invite.getPk().getStudent());
+        }
+        return studentService.findByIds(studentIds);
+    }
+
+    public List<Group> findGroupsByStudent(Long studentId) {
+        Student student = studentService.findStudentById(studentId);
+        List<Invite> invites = inviteRepository.findAllByIsAcceptTrueAndPk_Student(student);
+        List<Long> groupIds = new ArrayList<>();
+        for (Invite invite : invites) {
+            groupIds.add(invite.getPk().getGroup());
+        }
+        return groupService.findByIds(groupIds);
+    }
+
+    public List<Group> getInvites(Long studentId) {
+        Student student = studentService.findStudentById(studentId);
+        List<Invite> invites = inviteRepository.findAllByIsAcceptFalseAndPk_Student(student);
+        List<Long> groupIds = new ArrayList<>();
+        for (Invite invite : invites) {
+            groupIds.add(invite.getPk().getGroup());
+        }
+        return groupService.findByIds(groupIds);
     }
 }

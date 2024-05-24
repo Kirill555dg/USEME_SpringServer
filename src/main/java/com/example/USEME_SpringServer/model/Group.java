@@ -2,6 +2,7 @@ package com.example.USEME_SpringServer.model;
 
 
 import com.example.USEME_SpringServer.model.invite.Invite;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "name")
+@JsonIgnoreProperties({"invites", "homeworks"})
 public class Group {
 
     @Id

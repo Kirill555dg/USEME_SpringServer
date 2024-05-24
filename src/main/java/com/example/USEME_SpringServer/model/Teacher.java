@@ -1,6 +1,7 @@
 package com.example.USEME_SpringServer.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "email")
+@JsonIgnoreProperties("groups")
 public class Teacher {
 
     @Id
@@ -40,7 +42,6 @@ public class Teacher {
     private Boolean isMale;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @Getter(AccessLevel.NONE)
     private List<Group> groups = new ArrayList<>();
 
     @Transient
@@ -48,13 +49,5 @@ public class Teacher {
 
     public int getAge() {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
-    }
-
-    public List<Long> getGroups(){
-        List<Long> groups_id = new ArrayList<>();
-        for (Group group : groups) {
-            groups_id.add(group.getId());
-        }
-        return groups_id;
     }
 }

@@ -20,8 +20,18 @@ public class GroupController {
     private InviteService inviteService;
 
     @GetMapping
+    public List<Group> findAllTeacherGroups() {
+        return groupService.findAllGroups();
+    }
+
+    @GetMapping("/teacher")
     public List<Group> findAllTeacherGroups(@RequestParam("teacher_id") Long id) {
         return groupService.findByTeacher(id);
+    }
+
+    @GetMapping("/student")
+    public List<Group> findAllStudentGroups(@RequestParam("student_id") Long id) {
+        return inviteService.findGroupsByStudent(id);
     }
 
     @GetMapping("/{id}")
@@ -46,11 +56,11 @@ public class GroupController {
 
 
 
-    @PostMapping("/invite")
+    @PostMapping("/invites")
     public Invite sendInvite(@RequestParam(name = "group_id") Long groupId, @RequestParam(name = "student_id") Long studentId){
         return inviteService.sendInvite(groupId, studentId);
     }
-    @DeleteMapping("/invite")
+    @DeleteMapping("/invites")
     public void deleteInvite(@RequestParam(name = "student_id") Long studentId,
                              @RequestParam(name = "group_id") Long groupId) {
         inviteService.deleteInvite(studentId, groupId);

@@ -2,6 +2,8 @@ package com.example.USEME_SpringServer.model;
 
 import com.example.USEME_SpringServer.model.invite.Invite;
 import com.example.USEME_SpringServer.model.statistic.Statistic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +18,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "email")
+@JsonIgnoreProperties({"invites", "statistics"})
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

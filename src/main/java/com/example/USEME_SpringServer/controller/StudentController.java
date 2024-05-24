@@ -1,5 +1,6 @@
 package com.example.USEME_SpringServer.controller;
 
+import com.example.USEME_SpringServer.model.Group;
 import com.example.USEME_SpringServer.model.Student;
 import com.example.USEME_SpringServer.model.Teacher;
 import com.example.USEME_SpringServer.model.invite.Invite;
@@ -26,6 +27,17 @@ public class StudentController {
         return studentService.findAllStudent();
     }
 
+
+    @GetMapping("/student")
+    public Student findByEmail(@RequestParam String email) {
+        return studentService.findByEmail(email);
+    }
+
+    @GetMapping("/group")
+    public List<Student> findStudentByGroup(@RequestParam(name = "group_id") Long groupId) {
+        return inviteService.findStudentsByGroup(groupId);
+    }
+
     @PostMapping("/registration")
     public Student registerTeacher(@RequestBody Student student) {
         return studentService.registration(student);
@@ -36,11 +48,6 @@ public class StudentController {
         return studentService.authorization(student);
     }
 
-
-    @GetMapping("/student")
-    public Student findByEmail(@RequestParam String email) {
-        return studentService.findByEmail(email);
-    }
 
     @PatchMapping("/change_info")
     public Student changeInfo(@RequestBody Student student){
@@ -58,13 +65,18 @@ public class StudentController {
     }
 
 
-    @PutMapping("/invite")
+    @GetMapping("/invites")
+    public List<Group> getInvites(@RequestParam(name = "student_id") Long studentId) {
+        return inviteService.getInvites(studentId);
+    }
+
+    @PutMapping("/invites")
     public Invite acceptInvite(@RequestParam(name = "student_id") Long studentId,
                                @RequestParam(name = "group_id") Long groupId) {
         return inviteService.accpetInvite(studentId, groupId);
     }
 
-    @DeleteMapping("/invite")
+    @DeleteMapping("/invites")
     public void deleteInvite(@RequestParam(name = "student_id") Long studentId,
                                @RequestParam(name = "group_id") Long groupId) {
         inviteService.deleteInvite(studentId, groupId);
