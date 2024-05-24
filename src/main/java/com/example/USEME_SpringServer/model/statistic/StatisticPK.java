@@ -29,4 +29,16 @@ public class StatisticPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "task_id")
     private Task task;
+
+    public Long getStudent() {
+        return student.getId();
+    }
+
+    public Long getHomework() {
+        return homework.getId();
+    }
+
+    public Long getTask() {
+        return task.getId();
+    }
 }
