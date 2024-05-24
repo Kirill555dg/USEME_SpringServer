@@ -2,6 +2,7 @@ package com.example.USEME_SpringServer.model;
 
 
 import com.example.USEME_SpringServer.model.statistic.Statistic;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
+@JsonIgnoreProperties({"group", "tasks", "statistics"})
 public class Homework {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
