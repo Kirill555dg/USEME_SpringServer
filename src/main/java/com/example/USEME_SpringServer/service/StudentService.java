@@ -3,7 +3,11 @@ package com.example.USEME_SpringServer.service;
 import com.example.USEME_SpringServer.exception.AlreadyExistException;
 import com.example.USEME_SpringServer.exception.NotFoundException;
 import com.example.USEME_SpringServer.exception.WrongPasswordException;
+import com.example.USEME_SpringServer.model.Group;
 import com.example.USEME_SpringServer.model.Student;
+import com.example.USEME_SpringServer.model.invite.Invite;
+import com.example.USEME_SpringServer.model.invite.InvitePK;
+import com.example.USEME_SpringServer.repository.InviteRepository;
 import com.example.USEME_SpringServer.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,6 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
-
 
     public List<Student> findAllStudent() {
         return studentRepository.findAll();

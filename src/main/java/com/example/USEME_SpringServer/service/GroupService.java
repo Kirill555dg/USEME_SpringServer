@@ -21,13 +21,7 @@ public class GroupService {
     private GroupRepository groupRepository;
 
     @Autowired
-    private InviteRepository inviteRepository;
-
-    @Autowired
     private TeacherService teacherService;
-
-    @Autowired
-    private StudentService studentService;
 
     public List<Group> findByTeacher(Long id) {
         return groupRepository.findByTeacher_Id(id);
@@ -62,19 +56,5 @@ public class GroupService {
 
     public void delete(Long id) {
         groupRepository.deleteById(id);
-    }
-
-    public Invite sendInvite(Long groupId, Long studentId) {
-
-        Group group = findGroupById(groupId);
-        Student student = studentService.findStudentById(studentId);
-        InvitePK pk = new InvitePK(student, group);
-        if (inviteRepository.existsById(pk)) {
-            throw new AlreadyExistException("Приглашение на вступление уже сущетсвует");
-        }
-        Invite invite = new Invite();
-        invite.setPk(pk);
-        invite.setIsAccept(false);
-        return inviteRepository.save(invite);
     }
 }
