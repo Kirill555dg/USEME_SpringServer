@@ -30,7 +30,6 @@ public class StatisticService {
     }
 
     public List<Statistic> createHomeworkStatistic(List<Statistic> homeworkStatistic) {
-
         return statisticRepository.saveAll(homeworkStatistic);
     }
 

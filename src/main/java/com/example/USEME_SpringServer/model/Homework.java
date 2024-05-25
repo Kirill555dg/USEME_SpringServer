@@ -66,7 +66,7 @@ public class Homework {
     public HashSet<Long> getCompleted(){
         HashSet<Long> completed = new HashSet<>();
         for (Statistic statistic : statistics) {
-            completed.add(statistic.getPk().getStudent());
+            completed.add(statistic.getPk().getStudent().getId());
         }
         return completed;
     }
