@@ -11,25 +11,13 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvitePK implements Serializable {
+public class ApplicationPK implements Serializable {
 
     @ManyToOne
-    //@MapsId("studentId")
     @JoinColumn(name = "student_id")
-    @Getter(AccessLevel.NONE)
     private Student student;
 
     @ManyToOne
-    //@MapsId("groupId")
     @JoinColumn(name = "group_id")
-    @Getter(AccessLevel.NONE)
     private Group group;
-
-    public Long getStudent() {
-        return student.getId();
-    }
-
-    public Long getGroup() {
-        return group.getId();
-    }
 }

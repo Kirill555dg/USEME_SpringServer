@@ -1,9 +1,8 @@
 package com.example.USEME_SpringServer.model;
 
-import com.example.USEME_SpringServer.model.invite.Invite;
+import com.example.USEME_SpringServer.model.invite.Application;
 import com.example.USEME_SpringServer.model.statistic.Statistic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -47,7 +46,7 @@ public class Student {
 
     @JsonIgnore
     @OneToMany(mappedBy = "pk.student", cascade = CascadeType.ALL)
-    private List<Invite> invites = new ArrayList<>();
+    private List<Application> applications = new ArrayList<>();
 
     @Transient
     private int age;
@@ -66,12 +65,12 @@ public class Student {
     }
 
     @JsonIgnore
-    public List<Invite> getInvites() {
-        return invites;
+    public List<Application> getApplications() {
+        return applications;
     }
 
     @JsonProperty("invites")
-    public void setInvites(List<Invite> invites) {
-        this.invites = invites;
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 }

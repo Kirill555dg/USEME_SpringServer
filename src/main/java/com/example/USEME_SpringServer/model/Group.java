@@ -1,15 +1,12 @@
 package com.example.USEME_SpringServer.model;
 
 
-import com.example.USEME_SpringServer.model.invite.Invite;
+import com.example.USEME_SpringServer.model.invite.Application;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +36,9 @@ public class Group {
     @Column(name = "description", columnDefinition = "text")
     private String description;
 
+    @Column(name = "password")
+    private String password;
+
     @Transient
     private int countMembers;
 
@@ -47,7 +47,7 @@ public class Group {
 
     @JsonIgnore
     @OneToMany(mappedBy = "pk.group")
-    private List<Invite> invites = new ArrayList<>();
+    private List<Application> applications = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
@@ -55,8 +55,8 @@ public class Group {
 
     public int getCountMembers() {
         countMembers = 0;
-        for (Invite invite : invites) {
-            if (invite.getIsAccept()) {
+        for (Application application : applications) {
+            if (application.getIsAccept()) {
                 countMembers++;
             }
         }
@@ -68,12 +68,12 @@ public class Group {
     }
 
     @JsonIgnore
-    public List<Invite> getInvites() {
-        return invites;
+    public List<Application> getApplications() {
+        return applications;
     }
     @JsonProperty("invites")
-    public void setInvites(List<Invite> invites) {
-        this.invites = invites;
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
     @JsonIgnore

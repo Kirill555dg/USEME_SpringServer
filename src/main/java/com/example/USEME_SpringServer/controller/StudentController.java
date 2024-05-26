@@ -1,10 +1,7 @@
 package com.example.USEME_SpringServer.controller;
 
-import com.example.USEME_SpringServer.model.Group;
 import com.example.USEME_SpringServer.model.Student;
-import com.example.USEME_SpringServer.model.Teacher;
-import com.example.USEME_SpringServer.model.invite.Invite;
-import com.example.USEME_SpringServer.service.InviteService;
+import com.example.USEME_SpringServer.service.ApplicationService;
 import com.example.USEME_SpringServer.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +17,7 @@ public class StudentController {
     private StudentService studentService;
 
     @Autowired
-    private InviteService inviteService;
+    private ApplicationService applicationService;
 
     @GetMapping
     public List<Student> findAllStudent() {
@@ -35,7 +32,7 @@ public class StudentController {
 
     @GetMapping("/group")
     public List<Student> findStudentByGroup(@RequestParam(name = "group_id") Long groupId) {
-        return inviteService.findStudentsByGroup(groupId);
+        return applicationService.findStudentsByGroup(groupId);
     }
 
     @PostMapping("/registration")
@@ -64,21 +61,4 @@ public class StudentController {
         studentService.deleteStudent(email);
     }
 
-
-    @GetMapping("/invites")
-    public List<Group> getInvites(@RequestParam(name = "student_id") Long studentId) {
-        return inviteService.getInvites(studentId);
-    }
-
-    @PutMapping("/invites")
-    public Invite acceptInvite(@RequestParam(name = "student_id") Long studentId,
-                               @RequestParam(name = "group_id") Long groupId) {
-        return inviteService.accpetInvite(studentId, groupId);
-    }
-
-    @DeleteMapping("/invites")
-    public void deleteInvite(@RequestParam(name = "student_id") Long studentId,
-                               @RequestParam(name = "group_id") Long groupId) {
-        inviteService.deleteInvite(studentId, groupId);
-    }
 }

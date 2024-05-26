@@ -1,7 +1,5 @@
 package com.example.USEME_SpringServer.model.invite;
 
-import com.example.USEME_SpringServer.model.Group;
-import com.example.USEME_SpringServer.model.Student;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,10 +8,10 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Invite {
+public class Application {
 
     @EmbeddedId
-    private InvitePK pk;
+    private ApplicationPK pk;
 
     @Column(name = "accept")
     private Boolean isAccept;

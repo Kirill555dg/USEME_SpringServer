@@ -1,9 +1,9 @@
 package com.example.USEME_SpringServer.controller;
 
 import com.example.USEME_SpringServer.model.Group;
-import com.example.USEME_SpringServer.model.invite.Invite;
+import com.example.USEME_SpringServer.model.invite.Application;
 import com.example.USEME_SpringServer.service.GroupService;
-import com.example.USEME_SpringServer.service.InviteService;
+import com.example.USEME_SpringServer.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class GroupController {
     private GroupService groupService;
 
     @Autowired
-    private InviteService inviteService;
+    private ApplicationService applicationService;
 
     @GetMapping
     public List<Group> findAllTeacherGroups() {
@@ -31,7 +31,7 @@ public class GroupController {
 
     @GetMapping("/student")
     public List<Group> findAllStudentGroups(@RequestParam("student_id") Long id) {
-        return inviteService.findGroupsByStudent(id);
+        return applicationService.findGroupsByStudent(id);
     }
 
     @GetMapping("/{id}")
@@ -52,17 +52,5 @@ public class GroupController {
     @DeleteMapping("/{id}")
     public void deleteGroup(@PathVariable Long id){
         groupService.delete(id);
-    }
-
-
-
-    @PostMapping("/invites")
-    public Invite sendInvite(@RequestParam(name = "group_id") Long groupId, @RequestParam(name = "student_id") Long studentId){
-        return inviteService.sendInvite(groupId, studentId);
-    }
-    @DeleteMapping("/invites")
-    public void deleteInvite(@RequestParam(name = "student_id") Long studentId,
-                             @RequestParam(name = "group_id") Long groupId) {
-        inviteService.deleteInvite(studentId, groupId);
     }
 }
