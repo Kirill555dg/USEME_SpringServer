@@ -2,6 +2,7 @@ package com.example.USEME_SpringServer.service;
 
 import com.example.USEME_SpringServer.exception.AlreadyExistException;
 import com.example.USEME_SpringServer.exception.NotFoundException;
+import com.example.USEME_SpringServer.exception.WrongPasswordException;
 import com.example.USEME_SpringServer.model.Group;
 import com.example.USEME_SpringServer.model.Student;
 import com.example.USEME_SpringServer.model.invite.Application;
@@ -37,16 +38,18 @@ public class ApplicationService {
                                 " не посылал заявку на вступление в группу с id " + pk.getGroup()));
     }
 
-    public Application sendInvite(Application application) {
-        Long groupId = application.getPk().getGroup().getId();
-        Long studentId = application.getPk().getStudent().getId();
+    public Application sendInvite(ApplicationPK pk) {
+        Long groupId = pk.getGroup().getId();
+        Long studentId = pk.getStudent().getId();
         Group group = groupService.findGroupById(groupId);
+        if (!group.getPassword().equals(pk.getGroup().getPassword())) {
+            throw new WrongPasswordException("Введен неверный пароль для вступления");
+        }
         Student student = studentService.findStudentById(studentId);
-        ApplicationPK pk = new ApplicationPK(student, group);
         if (inviteRepository.existsById(pk)) {
             throw new AlreadyExistException("Заявка на вступление уже сущетсвует");
         }
-        application.setPk(pk);
+        Application application = new Application(pk);
         application.setIsAccept(false);
         return inviteRepository.save(application);
     }
@@ -102,5 +105,15 @@ public class ApplicationService {
             groupIds.add(application.getPk().getGroup().getId());
         }
         return groupService.findByIds(groupIds);
+    }
+
+    public List<Student> getApplications(Long groupId) {
+        Group group = groupService.findGroupById(groupId);
+        List<Application> applications = inviteRepository.findAllByIsAcceptFalseAndPk_Group(group);
+        List<Long> studentIds = new ArrayList<>();
+        for (Application application : applications) {
+            studentIds.add(application.getPk().getStudent().getId());
+        }
+        return studentService.findByIds(studentIds);
     }
 }

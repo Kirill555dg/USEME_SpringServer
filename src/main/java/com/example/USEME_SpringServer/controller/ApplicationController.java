@@ -1,6 +1,7 @@
 package com.example.USEME_SpringServer.controller;
 
 import com.example.USEME_SpringServer.model.Group;
+import com.example.USEME_SpringServer.model.Student;
 import com.example.USEME_SpringServer.model.invite.Application;
 import com.example.USEME_SpringServer.model.invite.ApplicationPK;
 import com.example.USEME_SpringServer.service.ApplicationService;
@@ -21,8 +22,12 @@ public class ApplicationController {
     }
 
     @GetMapping("/student")
-    public List<Group> getApplications(@RequestParam(name = "student_id") Long studentId) {
+    public List<Group> getInvites(@RequestParam(name = "student_id") Long studentId) {
         return applicationService.getInvites(studentId);
+    }
+    @GetMapping("/group")
+    public List<Student> getApplications(@RequestParam(name = "group_id") Long groupId) {
+        return applicationService.getApplications(groupId);
     }
 
     @PutMapping
@@ -31,8 +36,8 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public Application sendInvite(@RequestBody Application application){
-        return applicationService.sendInvite(application);
+    public Application sendInvite(@RequestBody ApplicationPK applicationPK){
+        return applicationService.sendInvite(applicationPK);
     }
 
     @DeleteMapping

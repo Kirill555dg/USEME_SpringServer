@@ -14,4 +14,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Applic
     List<Application> findAllByIsAcceptTrueAndPk_Student(Student pk_student);
 
     List<Application> findAllByIsAcceptFalseAndPk_Student(Student pk_student);
+    List<Application> findAllByIsAcceptFalseAndPk_Group(Group pk_group);
 }

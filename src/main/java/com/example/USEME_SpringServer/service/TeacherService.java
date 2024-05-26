@@ -30,7 +30,7 @@ public class TeacherService {
         Teacher real = findByEmail(email);
 
         if (!real.getPassword().equals(password)) {
-            throw new WrongPasswordException();
+            throw new WrongPasswordException("Вы ввели неверный пароль");
         }
         return real;
     }

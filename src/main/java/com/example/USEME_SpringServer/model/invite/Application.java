@@ -16,4 +16,7 @@ public class Application {
     @Column(name = "accept")
     private Boolean isAccept;
 
+    public Application(ApplicationPK pk) {
+        this.pk = pk;
+    }
 }
