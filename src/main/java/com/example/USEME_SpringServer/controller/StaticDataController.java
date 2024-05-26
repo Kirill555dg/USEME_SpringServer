@@ -2,7 +2,13 @@ package com.example.USEME_SpringServer.controller;
 
 
 import com.example.USEME_SpringServer.exception.NotFoundException;
-import com.example.USEME_SpringServer.staticData.*;
+import com.example.USEME_SpringServer.model.Category;
+import com.example.USEME_SpringServer.model.Subject;
+import com.example.USEME_SpringServer.model.topic.Topic;
+import com.example.USEME_SpringServer.model.topic.TopicPK;
+import com.example.USEME_SpringServer.repository.CategoryRepository;
+import com.example.USEME_SpringServer.repository.SubjectRepository;
+import com.example.USEME_SpringServer.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

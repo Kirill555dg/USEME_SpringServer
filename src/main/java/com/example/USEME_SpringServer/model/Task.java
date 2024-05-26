@@ -1,8 +1,7 @@
 package com.example.USEME_SpringServer.model;
 
 import com.example.USEME_SpringServer.model.statistic.Statistic;
-import com.example.USEME_SpringServer.staticData.Topic;
-import com.example.USEME_SpringServer.staticData.TopicPK;
+import com.example.USEME_SpringServer.model.topic.TopicPK;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

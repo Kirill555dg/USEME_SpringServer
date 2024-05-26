@@ -1,4 +1,4 @@
-package com.example.USEME_SpringServer.staticData;
+package com.example.USEME_SpringServer.model;
 
 
 import jakarta.persistence.Column;
@@ -8,18 +8,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Bean;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "subjects")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
-
-    private TopicPK pk;
-
+public class Subject {
     @Id
-    @Column(name = "category_name")
-    private String category;
+    @Column(name = "subject")
+    private String subject;
 }

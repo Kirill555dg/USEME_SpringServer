@@ -1,7 +1,6 @@
 package com.example.USEME_SpringServer.repository;
 
 import com.example.USEME_SpringServer.model.Task;
-import com.example.USEME_SpringServer.staticData.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

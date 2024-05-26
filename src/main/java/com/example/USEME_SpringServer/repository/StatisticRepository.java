@@ -22,7 +22,7 @@ public interface StatisticRepository extends JpaRepository<Statistic, StatisticP
             +"(:student_id = -1 or s.pk.student.id = :student_id) and "
             +"(:homework_id = -1 or s.pk.homework.id = :homework_id) and "
             +"(:task_id = -1 or s.pk.task.id = :task_id)")
-    List<Statistic> getStatistic(@Param("student_id") Long studentId,
+    List<Statistic> getAllStatistics(@Param("student_id") Long studentId,
                                  @Param("homework_id") Long homeworkId,
                                  @Param("task_id") Long taskId);
 

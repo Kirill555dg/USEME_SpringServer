@@ -1,4 +1,4 @@
-package com.example.USEME_SpringServer.staticData;
+package com.example.USEME_SpringServer.model.topic;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

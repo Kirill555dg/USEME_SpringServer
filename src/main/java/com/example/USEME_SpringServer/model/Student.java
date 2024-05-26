@@ -35,7 +35,7 @@ public class Student {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
+    private LocalDate dateOfBirth = LocalDate.EPOCH;
 
     @Column(name = "gender")
     private Boolean isMale;
