@@ -33,7 +33,7 @@ public class InviteService {
         Student student = studentService.findStudentById(studentId);
         InvitePK pk = new InvitePK(student, group);
         if (inviteRepository.existsById(pk)) {
-            throw new AlreadyExistException("Приглашение на вступление уже сущетсвует");
+            throw new AlreadyExistException("Заявка на вступление уже сущетсвует");
         }
         Invite invite = new Invite();
         invite.setPk(pk);
@@ -48,9 +48,9 @@ public class InviteService {
         InvitePK pk = new InvitePK(student, group);
         Invite invite = inviteRepository
                 .findById(pk)
-                .orElseThrow(() -> new NotFoundException("Учащемуся с id " + studentId + " приглашение в группу с id " + groupId + " не поступало"));
+                .orElseThrow(() -> new NotFoundException("Учащийся с id " + studentId + " не посылал заявку на вступление в группу с id " + groupId));
         if (invite.getIsAccept()) {
-            throw new AlreadyExistException("Приглашение уже принято");
+            throw new AlreadyExistException("Заявка уже принята");
         }
         invite.setIsAccept(true);
         return inviteRepository.save(invite);
@@ -62,7 +62,7 @@ public class InviteService {
         InvitePK pk = new InvitePK(student, group);
         Invite invite = inviteRepository
                 .findById(pk)
-                .orElseThrow(() -> new NotFoundException("Учащемуся с id " + studentId + " приглашение в группу с id " + groupId + " не поступало"));
+                .orElseThrow(() -> new NotFoundException("Учащийся с id " + studentId + " не посылал заявку на вступление в группу с id " + groupId));
         inviteRepository.delete(invite);
     }
 

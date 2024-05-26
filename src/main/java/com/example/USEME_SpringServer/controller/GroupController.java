@@ -40,8 +40,8 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public Group createGroup(@RequestBody Group group, @RequestParam(name = "teacher_id") Long teacherId) {
-        return groupService.create(group, teacherId);
+    public Group createGroup(@RequestBody Group group) {
+        return groupService.create(group);
     }
 
     @PutMapping("/{id}")

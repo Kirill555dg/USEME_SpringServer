@@ -32,8 +32,8 @@ public class GroupService {
         return groupRepository.findAllById(ids);
     }
 
-    public Group create(Group group, Long teacher_id) {
-        Teacher teacher = teacherService.findTeacherById(teacher_id);
+    public Group create(Group group) {
+        Teacher teacher = teacherService.findTeacherById(group.getTeacher().getId());
         group.setTeacher(teacher);
         return groupRepository.save(group);
     }
