@@ -47,11 +47,12 @@ public class GroupService {
     public Group update(Long id, Group group) {
         return groupRepository
                 .findById(id)
-                .map(oldTask -> {
-                    oldTask.setName(group.getName());
-                    oldTask.setDescription(group.getDescription());
-                    oldTask.setTargetSubject(group.getTargetSubject());
-                    return groupRepository.save(oldTask);
+                .map(oldGroup -> {
+                    oldGroup.setName(group.getName());
+                    oldGroup.setDescription(group.getDescription());
+                    oldGroup.setTargetSubject(group.getTargetSubject());
+                    oldGroup.setPassword(group.getPassword());
+                    return groupRepository.save(oldGroup);
                 })
                 .orElseGet(() -> {
                     group.setId(id);
