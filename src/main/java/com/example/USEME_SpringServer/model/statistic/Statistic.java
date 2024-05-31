@@ -21,4 +21,7 @@ public class Statistic {
 
     @Column(name = "correct")
     private Boolean isCorrect;
+
+    @Column(name = "answer")
+    private String answer;
 }

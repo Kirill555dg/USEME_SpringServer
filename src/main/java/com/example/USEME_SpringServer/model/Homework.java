@@ -37,12 +37,12 @@ public class Homework {
     @Column(name = "deadline")
     private LocalDate deadline;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToMany
     @JoinTable(name = "homeworks_tasks",
     joinColumns = @JoinColumn(name = "homework_id", referencedColumnName = "id"),
@@ -71,7 +71,7 @@ public class Homework {
         return completed;
     }
 
-    @JsonProperty("group")
+    /*@JsonProperty("group")
     public void setGroup(Group group) {
         this.group = group;
     }
@@ -79,9 +79,9 @@ public class Homework {
     @JsonIgnore
     public Group getGroup() {
         return group;
-    }
+    }*/
 
-    @JsonIgnore
+    /*@JsonIgnore
     public List<Task> getTasks() {
         return tasks;
     }
@@ -89,7 +89,7 @@ public class Homework {
     @JsonProperty("tasks")
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
-    }
+    }*/
 
     @JsonIgnore
     public List<Statistic> getStatistics() {
